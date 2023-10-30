@@ -9,14 +9,14 @@ enum Lokacija
 
 class Stan
 {
-    public int brojKvadrata { get; set; }
+    public int BrojKvadrata { get; set; }
     public Lokacija lokacija { get; set; }
     public bool namjesten { get; set; }
     public bool internet { get; set; }
 
-    public Stan(int brojKvadrata, Lokacija lokacija, bool namjesten, bool internet)
+    public Stan(int BrojKvadrata, Lokacija lokacija, bool namjesten, bool internet)
     {
-        this.brojKvadrata = brojKvadrata;
+        this.BrojKvadrata = BrojKvadrata;
         this.lokacija = lokacija;
         this.namjesten = namjesten;
         this.internet = internet;
@@ -24,13 +24,13 @@ class Stan
 
     public virtual void Ispisi()
     {
-        Console.Write($"{brojKvadrata,-2}, {lokacija,-9}, {namjesten,-8}, {internet,-7}");
+        Console.Write($"{BrojKvadrata,-2}, {lokacija,-9}, {namjesten,-8}, {internet,-7}");
     }
 
-    public virtual double ObracnuajCijenuNajma()
+    public virtual double ObracunajCijenuNajma()
     {
-        double cijena = (Lokacija == Lokacija.Gradsko) ? 200 : 150;
-        cijena += brojKvadrata * 1;
+        double cijena = (lokacija == Lokacija.Gradsko) ? 200 : 150;
+        cijena += BrojKvadrata * 1;
         if (namjesten && internet)
         {
             cijena += cijena * 0.01;
@@ -43,10 +43,75 @@ class Stan
         return cijena;
     }
 }
-
+//Nejra Pirija
 // Nenamjesten stan klasa
+class NenamjestenStan : Stan
+{
+    public NenamjestenStan(int BrojKvadrata, Lokacija lokacija, bool internet)
+        : base(BrojKvadrata, lokacija, false, internet)
+    {
+    }
+
+    public override void Ispisi()
+    {
+        base.Ispisi();
+        Console.WriteLine();
+    }
+
+    public override double ObracunajCijenuNajma()
+    {
+        double cijena = base.ObracunajCijenuNajma();
+
+        if (internet)
+        {
+            cijena += cijena * 0.02;
+        }
+
+        return cijena;
+    }
+}
+
+
+
 
 // Namjesten stan klasa
+
+class NamjestenStan : Stan
+{
+    public double VrijednostNamjestaja { get; set; }
+    public int BrojAparata { get; set; }
+
+    public NamjestenStan(int BrojKvadrata, Lokacija lokacija, bool internet, double vrijednostNamjestaja, int brojAparata)
+        : base(BrojKvadrata, lokacija, true, internet)
+    {
+        VrijednostNamjestaja = vrijednostNamjestaja;
+        BrojAparata = brojAparata;
+    }
+
+    public override void Ispisi()
+    {
+        base.Ispisi();
+        Console.Write($" {VrijednostNamjestaja,-20} {BrojAparata,-10}");
+        Console.WriteLine();
+    }
+
+    public override double ObracunajCijenuNajma()
+    {
+        double cijena = base.ObracunajCijenuNajma();
+
+        if (BrojAparata < 3)
+        {
+            cijena += VrijednostNamjestaja * 0.01;
+        }
+        else
+        {
+            cijena += VrijednostNamjestaja * 0.02;
+        }
+
+        return cijena;
+    }
+}
+
 
 class Program
 {

@@ -62,11 +62,6 @@ class NenamjestenStan : Stan
     {
         double cijena = base.ObracunajCijenuNajma();
 
-        if (internet)
-        {
-            cijena += cijena * 0.02;
-        }
-
         return cijena;
     }
 }

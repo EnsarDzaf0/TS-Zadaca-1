@@ -24,7 +24,7 @@ class Stan
 
     public virtual void Ispisi()
     {
-        Console.Write($"{BrojKvadrata,-2}, {lokacija,-9}, {namjesten,-8}, {internet,-7}");
+        Console.Write($"{BrojKvadrata,-8} {lokacija,-11} {namjesten,-9} {internet,-8}");
     }
 
     public virtual double ObracunajCijenuNajma()
@@ -86,7 +86,7 @@ class NamjestenStan : Stan
     public override void Ispisi()
     {
         base.Ispisi();
-        Console.Write($" {VrijednostNamjestaja,-20} {BrojAparata,-10}");
+        Console.Write($" {VrijednostNamjestaja,-21} {BrojAparata,-10}");
         Console.WriteLine();
     }
 
@@ -117,7 +117,7 @@ class Program
         stanovi[1] = new NenamjestenStan(80, Lokacija.Prigradsko, true);
         stanovi[2] = new NamjestenStan(40, Lokacija.Prigradsko, true, 2000, 2);
         stanovi[3] = new NamjestenStan(80, Lokacija.Gradsko, false, 3000, 6);
-        Console.WriteLine("Površina Lokacija Namješten Internet Vrijednost namještaja Broj aparata");
+        Console.WriteLine("Površina Lokacija   Namješten Internet Vrijednost namještaja Broj aparata");
         foreach (Stan stan in stanovi)
         {
             stan.Ispisi();

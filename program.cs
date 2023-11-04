@@ -68,7 +68,7 @@ class NenamjestenStan : Stan
 
 
 
-
+//Fatima Muratovic
 // Namjesten stan klasa
 
 class NamjestenStan : Stan
